@@ -9,6 +9,7 @@ module.exports = function(grunt){
 }
 
 /**
+		FOR THE NEXT STEP, WE WILL NEED THIS
 
 		connect: {
 	      livereload: {
