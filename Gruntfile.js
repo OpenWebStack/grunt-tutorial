@@ -20,9 +20,9 @@ module.exports = function(grunt){
 			js:{
 				src:[
 					'js/angular.js',
-					'js/app.js',
-					'build/temp/templates.js',
-					'build/temp/**/*.js'
+					'build/temp/app.js',
+					'build/temp/**/*.js',
+					'build/temp/templates.js'
 				],
 				dest:'build/app.js'
 			},
