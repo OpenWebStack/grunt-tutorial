@@ -22,7 +22,7 @@ module.exports = function(grunt){
 					'js/angular.js',
 					'js/app.js',
 					'build/temp/templates.js',
-					'js/**/*.js'
+					'build/temp/**/*.js'
 				],
 				dest:'build/app.js'
 			},
@@ -58,6 +58,16 @@ module.exports = function(grunt){
 				dest:'build/temp/templates.js'
 			}
 		},
+
+		ngmin: {
+			app: {
+				expand: true,
+				cwd: 'js',
+				src: ['**/*.js', '!angular.js'],
+				dest: 'build/temp'
+			}
+		},
+
 
 		//Regarde Task
 		regarde:{
@@ -112,22 +122,21 @@ module.exports = function(grunt){
 
 	//OUR TASKS
 	/*
-		Added ngtemplates
+		Added ngmin
 			- run 'grunt build'
 			- checkout the build dir afterwards, see the index.html
-			- still won't run, run because our stuff isn't build safe
-				- explain build-safe - we need the ngmin to make it build safe for us
+
 
 		1 - clean:build - cleans out the build directory
 		2 - stylus - compile our stylus stuff, incase we didn't have regarde running
-		3 - ngtemplates - PRECOMPILE THE TEMPLATES, SO THAT THEY ARE INLINED JS, AND 
-		    			  INCLUDED IN THE BUILD
-		4 - concat - concat all our js/css files into one
-		5 - uglify - minifiy and obfuscate our js
-		6 - htmlrefs - remove/replace specified html pieces during the build
-		7 - clean:tempbuild - REMOVE THE TEMP FOLDER USED DURING THE BUILD
+		3 - ngtemplates - precompiled the templates
+		4 -	ngmin - MAKE ALL ANGULAR DEPENDENCIES ALL BUILD SAFE 
+		5 - concat - concat all our js/css files into one
+		6 - uglify - minifiy and obfuscate our js
+		7 - htmlrefs - remove/replace specified html pieces during the build
+		8 - clean:tempbuild - remove temp build dir
 	*/
-	grunt.registerTask('build',['clean:build', 'stylus', 'ngtemplates', 'concat', 'uglify', 'htmlrefs']);
+	grunt.registerTask('build',['clean:build', 'stylus', 'ngtemplates', 'ngmin:app', 'concat', 'uglify', 'htmlrefs', 'clean:tempbuild']);
 	grunt.registerTask('dev',['livereload-start', 'connect', 'regarde']);
 
 }
