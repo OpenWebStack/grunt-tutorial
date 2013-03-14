@@ -1,18 +1,19 @@
 module.exports = function(grunt){
 
 	grunt.initConfig({
-		//WE PUT OUR TASKS IN HERE
-	});
+		
+		regarde:{
+			dev:{
+				files:[
+					'js/**/*.js',
+					'css/**/*.css',
+					'templates/**/*.html',
+					'index.html'
+				],
+				tasks:['livereload']
+			}
+		},
 
-	grunt.registerTask('build',[/* We can add our tasks from initConfig here */]);
-
-}
-
-/**
-		FOR THE NEXT STEP, WE WILL NEED THIS
-
-
-		ADD THIS AS AN INITCONFIG PROPERTY
 		connect: {
 	      livereload: {
 	        options: {
@@ -24,6 +25,18 @@ module.exports = function(grunt){
 	        }
 	      }
 	    }
+	});
+
+	grunt.loadNpmTasks('grunt-regarde');
+	grunt.loadNpmTasks('grunt-contrib-connect');
+	grunt.loadNpmTasks('grunt-contrib-livereload');
+
+	grunt.registerTask('build',[/* We can add our tasks from initConfig here */]);
+	grunt.registerTask('dev',['livereload-start', 'connect', 'regarde']);
+
+}
+
+/**
 
 	ADD THIS TO THE INDEX.HTML
 	<script type="text/javascript">
