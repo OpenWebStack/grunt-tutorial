@@ -21,9 +21,9 @@ module.exports = function(grunt){
 			js:{
 				src:[
 					'js/angular.js',
-					'js/app.js',
-					'build/temp/templates.js',
-					'build/temp/**/*.js'
+					'build/temp/app.js',
+					'build/temp/**/*.js',
+					'build/temp/templates.js'
 				],
 				dest:'build/app.js'
 			},
@@ -159,7 +159,7 @@ module.exports = function(grunt){
 		8 - htmlmin - MINIFY OUR HTML, SO THAT IT IS AS COMPACT AS POSSIBLE
 		9 - clean:tempbuild - remove temp build dir
 	*/
-	grunt.registerTask('build',['clean:build', 'stylus', 'ngtemplates', 'ngmin:app', 'concat', 'uglify', 'htmlrefs', 'clean:tempbuild']);
+	grunt.registerTask('build',['clean:build', 'stylus', 'ngtemplates', 'ngmin:app', 'concat', 'uglify', 'htmlrefs', 'htmlmin', 'clean:tempbuild']);
 	grunt.registerTask('dev',['livereload-start', 'connect', 'regarde']);
 
 }
