@@ -11,6 +11,8 @@ module.exports = function(grunt){
 /**
 		FOR THE NEXT STEP, WE WILL NEED THIS
 
+
+		ADD THIS AS AN INITCONFIG PROPERTY
 		connect: {
 	      livereload: {
 	        options: {
@@ -22,5 +24,12 @@ module.exports = function(grunt){
 	        }
 	      }
 	    }
+
+	ADD THIS TO THE INDEX.HTML
+	<script type="text/javascript">
+		document.write('<script src=\"http://'
+		  + (location.host || 'localhost').split(':')[0]
+  		  + ':35729/livereload.js?snipver=1\"><\/script>')
+	</script>
 
 */
