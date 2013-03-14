@@ -1,19 +1,19 @@
 module.exports = function(grunt){
 
 	grunt.initConfig({
-		
-		regarde:{
-			dev:{
-				files:[
-					'js/**/*.js',
-					'css/**/*.css',
-					'templates/**/*.html'
-				],
-				tasks:['livereload']
-			}
-		}
-		//launch a tiny-lr server for livereload
-	    connect: {
+		//WE PUT OUR TASKS IN HERE
+	});
+
+	grunt.registerTask('build',[/* We can add our tasks from initConfig here */]);
+
+}
+
+/**
+		FOR THE NEXT STEP, WE WILL NEED THIS
+
+
+		ADD THIS AS AN INITCONFIG PROPERTY
+		connect: {
 	      livereload: {
 	        options: {
 	          port: 9001,
@@ -25,12 +25,11 @@ module.exports = function(grunt){
 	      }
 	    }
 
-	});
+	ADD THIS TO THE INDEX.HTML
+	<script type="text/javascript">
+		document.write('<script src=\"http://'
+		  + (location.host || 'localhost').split(':')[0]
+  		  + ':35729/livereload.js?snipver=1\"><\/script>')
+	</script>
 
-	grunt.loadNpmTask('grunt-regarde');
-	grunt.loadNpmTask('grunt-contrib-connect');
-	grunt.loadNpmTask('grunt-contrib-livereload');
-
-	grunt.registerTask('build',[/* We can add our tasks from initConfig here */]);
-
-}
+*/
