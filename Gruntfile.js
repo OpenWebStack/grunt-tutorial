@@ -103,8 +103,16 @@ module.exports = function(grunt){
 
 	//OUR TASKS
 	/*
-		1 - Added the htmlrefs task
-			- see the index.html to see how that changes for htmlrefs
+		Added htmlrefs
+			- checkout the new comments on the index.html
+			- run 'grunt build'
+			- checkout the build dir afterwards, see the index.html
+
+		1 - clean:build - cleans out the build directory
+		2 - stylus - compile our stylus stuff, incase we didn't have regarde running
+		3 - concat - concat all our js/css files into one
+		4 - uglify - minifiy and obfuscate our js
+		5 - htmlrefs - ADDED THE HTMLREFS PIECE TO REPLACE/REMOVE CERTAIN TAGS AT BUILD TIME
 	*/
 	grunt.registerTask('build',['clean:build', 'stylus', 'concat', 'uglify', 'htmlrefs']);
 	grunt.registerTask('dev',['livereload-start', 'connect', 'regarde']);
