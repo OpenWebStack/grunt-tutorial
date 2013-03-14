@@ -16,6 +16,7 @@ module.exports = function(grunt){
 			tempbuild : 'build/temp'
 		},
 
+		//concat our files
 		concat:{
 			js:{
 				src:[
@@ -32,6 +33,7 @@ module.exports = function(grunt){
 			}
 		},
 
+		//minify our files
 		uglify:{
 			app:{
 				src:['build/app.js'],
@@ -39,6 +41,7 @@ module.exports = function(grunt){
 			}
 		},
 
+		//remove the scripts from our index, and replace with the concat'd min'd file
 		htmlrefs:{
 			options: {
 				file: { 
@@ -51,6 +54,7 @@ module.exports = function(grunt){
 			}
 		},
 
+		//compile our templates so that they can be inlined
 		ngtemplates:{
 			options:{base:'app'},
 			app:{
@@ -59,6 +63,7 @@ module.exports = function(grunt){
 			}
 		},
 
+		//make the angular dependences build safe
 		ngmin: {
 			app: {
 				expand: true,
@@ -68,6 +73,18 @@ module.exports = function(grunt){
 			}
 		},
 
+		//minify the HTML file (index.html)
+		htmlmin: {
+			index: {
+				options: {
+					removeComments: true, //doesn't remove IE comments
+					collapseWhitespace: true
+				},
+				files: {
+					'build/index.html': 'build/index.html'
+				}
+			}
+		},
 
 		//Regarde Task
 		regarde:{
@@ -122,9 +139,14 @@ module.exports = function(grunt){
 
 	//OUR TASKS
 	/*
-		Added ngmin
+		Added htmlmin
 			- run 'grunt build'
 			- checkout the build dir afterwards, see the index.html
+			- THE END
+				things we didn't cover
+					- compressing images (very simple)
+					- jshint (very simple)
+					- mocha/gruntacular integration (entire training for this)
 
 
 		1 - clean:build - cleans out the build directory
@@ -134,7 +156,8 @@ module.exports = function(grunt){
 		5 - concat - concat all our js/css files into one
 		6 - uglify - minifiy and obfuscate our js
 		7 - htmlrefs - remove/replace specified html pieces during the build
-		8 - clean:tempbuild - remove temp build dir
+		8 - htmlmin - MINIFY OUR HTML, SO THAT IT IS AS COMPACT AS POSSIBLE
+		9 - clean:tempbuild - remove temp build dir
 	*/
 	grunt.registerTask('build',['clean:build', 'stylus', 'ngtemplates', 'ngmin:app', 'concat', 'uglify', 'htmlrefs', 'clean:tempbuild']);
 	grunt.registerTask('dev',['livereload-start', 'connect', 'regarde']);
