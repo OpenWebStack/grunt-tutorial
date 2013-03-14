@@ -107,6 +107,10 @@ module.exports = function(grunt){
 			- checkout the new comments on the index.html
 			- run 'grunt build'
 			- checkout the build dir afterwards, see the index.html
+			- still won't run, cause we moved all files except the templates directory
+				- we need to pre-compile our templates, so that they become inlined
+				  javascript instead of separate files, which will make separate
+				  network requests
 
 		1 - clean:build - cleans out the build directory
 		2 - stylus - compile our stylus stuff, incase we didn't have regarde running
