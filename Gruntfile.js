@@ -2,18 +2,32 @@ module.exports = function(grunt){
 
 	grunt.initConfig({
 		
+		//Stylus Task
+		stylus:{
+			compile:{
+				files:{
+					'css/app.css' : 'css/app.styl'
+				}
+			}
+		}
+
+		//Regarde Task
 		regarde:{
-			dev:{
-				files:[
-					'js/**/*.js',
-					'css/**/*.css',
-					'templates/**/*.html',
-					'index.html'
-				],
+			js:{
+				files:['js/**/*.js', '**/*.html'],
 				tasks:['livereload']
+			},
+			css:{
+				files:['css/**/*.css'],
+				tasks:['livereload']
+			},
+			stylus:{
+				files:['css/**/*.styl'],
+				tasks:['stylus']
 			}
 		},
 
+		//Tiny LR server for Livereload
 		connect: {
 	      livereload: {
 	        options: {
@@ -27,11 +41,29 @@ module.exports = function(grunt){
 	    }
 	});
 
+	//Live reload tasks
 	grunt.loadNpmTasks('grunt-regarde');
 	grunt.loadNpmTasks('grunt-contrib-connect');
 	grunt.loadNpmTasks('grunt-contrib-livereload');
+	//grunt plugins
+	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-contrib-clean');
+	grunt.loadNpmTasks('grunt-contrib-stylus');
+	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-contrib-htmlmin');
+	grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-angular-templates');
+	grunt.loadNpmTasks('grunt-clear');
+	grunt.loadNpmTasks('grunt-htmlrefs');
+	grunt.loadNpmTasks('grunt-simple-mocha');
+	grunt.loadNpmTasks('gruntacular');
+	grunt.loadNpmTasks('grunt-release');
+	grunt.loadNpmTasks('grunt-ngmin');
 
-	grunt.registerTask('build',[/* We can add our tasks from initConfig here */]);
+
+	//OUR TASKS
+	grunt.registerTask('build',[]);
 	grunt.registerTask('dev',['livereload-start', 'connect', 'regarde']);
 
 }
