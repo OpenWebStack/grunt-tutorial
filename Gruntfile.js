@@ -38,6 +38,18 @@ module.exports = function(grunt){
 			}
 		},
 
+		htmlrefs:{
+			options: {
+				file: { 
+					buildNumber: 47878 //todo generate unique from contents of file for each file
+				}
+			},
+      		build: {
+				src: 'index.html',
+				dest: 'build/'
+			}
+		},
+
 		//Regarde Task
 		regarde:{
 			js:{
@@ -91,11 +103,10 @@ module.exports = function(grunt){
 
 	//OUR TASKS
 	/*
-		1 - Added concat and uglify
-			- run 'grunt build'
-			- checkout the build dir afterwards
+		1 - Added the htmlrefs task
+			- see the index.html to see how that changes for htmlrefs
 	*/
-	grunt.registerTask('build',['clean:build', 'stylus', 'concat', 'uglify']);
+	grunt.registerTask('build',['clean:build', 'stylus', 'concat', 'uglify', 'htmlrefs']);
 	grunt.registerTask('dev',['livereload-start', 'connect', 'regarde']);
 
 }
