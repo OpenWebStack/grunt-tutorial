@@ -9,7 +9,33 @@ module.exports = function(grunt){
 					'css/app.css' : 'css/app.styl'
 				}
 			}
-		}
+		},
+
+		clean:{	
+			build: 'build'
+		},
+
+		concat:{
+			js:{
+				src:[
+					'js/angular.js',
+					'js/app.js',
+					'js/**/*.js'
+				],
+				dest:'build/app.js'
+			},
+			css:{
+				src:['css/**/*.css'],
+				dest:'build/app.css'
+			}
+		},
+
+		uglify:{
+			app:{
+				src:['build/app.js'],
+				dest:'build/app.js'
+			}
+		},
 
 		//Regarde Task
 		regarde:{
@@ -63,7 +89,7 @@ module.exports = function(grunt){
 
 
 	//OUR TASKS
-	grunt.registerTask('build',[]);
+	grunt.registerTask('build',['clean:build', 'stylus', 'concat', 'uglify']);
 	grunt.registerTask('dev',['livereload-start', 'connect', 'regarde']);
 
 }
