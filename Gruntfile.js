@@ -9,7 +9,7 @@ module.exports = function(grunt){
 					'css/app.css' : 'css/app.styl'
 				}
 			}
-		}
+		},
 
 		//Regarde Task
 		regarde:{
