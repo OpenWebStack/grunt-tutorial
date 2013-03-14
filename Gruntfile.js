@@ -91,9 +91,14 @@ module.exports = function(grunt){
 
 	//OUR TASKS
 	/*
-		1 - Added concat and uglify
+		Added concat and uglify
 			- run 'grunt build'
 			- checkout the build dir afterwards
+
+		1 - clean:build - cleans out the build directory
+		2 - stylus - compile our stylus stuff, incase we didn't have regarde running
+		3 - concat - concat all our js/css files into one
+		4 - uglify - minifiy and obfuscate our js
 	*/
 	grunt.registerTask('build',['clean:build', 'stylus', 'concat', 'uglify']);
 	grunt.registerTask('dev',['livereload-start', 'connect', 'regarde']);
