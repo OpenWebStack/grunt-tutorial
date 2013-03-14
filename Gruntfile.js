@@ -20,6 +20,7 @@ module.exports = function(grunt){
 				src:[
 					'js/angular.js',
 					'js/app.js',
+					'build/temp/templates.js',
 					'js/**/*.js'
 				],
 				dest:'build/app.js'
@@ -89,6 +90,11 @@ module.exports = function(grunt){
 
 
 	//OUR TASKS
+	/*
+		1 - Added concat and uglify
+			- run 'grunt build'
+			- checkout the build dir afterwards
+	*/
 	grunt.registerTask('build',['clean:build', 'stylus', 'concat', 'uglify']);
 	grunt.registerTask('dev',['livereload-start', 'connect', 'regarde']);
 
