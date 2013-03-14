@@ -12,7 +12,8 @@ module.exports = function(grunt){
 		},
 
 		clean:{	
-			build: 'build'
+			build: 'build',
+			tempbuild : 'build/temp'
 		},
 
 		concat:{
@@ -47,6 +48,14 @@ module.exports = function(grunt){
       		build: {
 				src: 'index.html',
 				dest: 'build/'
+			}
+		},
+
+		ngtemplates:{
+			options:{base:'app'},
+			app:{
+				src:['templates/**/*.html'],
+				dest:'build/temp/templates.js'
 			}
 		},
 
@@ -103,22 +112,22 @@ module.exports = function(grunt){
 
 	//OUR TASKS
 	/*
-		Added htmlrefs
-			- checkout the new comments on the index.html
+		Added ngtemplates
 			- run 'grunt build'
 			- checkout the build dir afterwards, see the index.html
-			- still won't run, cause we moved all files except the templates directory
-				- we need to pre-compile our templates, so that they become inlined
-				  javascript instead of separate files, which will make separate
-				  network requests
+			- still won't run, run because our stuff isn't build safe
+				- explain build-safe - we need the ngmin to make it build safe for us
 
 		1 - clean:build - cleans out the build directory
 		2 - stylus - compile our stylus stuff, incase we didn't have regarde running
-		3 - concat - concat all our js/css files into one
-		4 - uglify - minifiy and obfuscate our js
-		5 - htmlrefs - ADDED THE HTMLREFS PIECE TO REPLACE/REMOVE CERTAIN TAGS AT BUILD TIME
+		3 - ngtemplates - PRECOMPILE THE TEMPLATES, SO THAT THEY ARE INLINED JS, AND 
+		    			  INCLUDED IN THE BUILD
+		4 - concat - concat all our js/css files into one
+		5 - uglify - minifiy and obfuscate our js
+		6 - htmlrefs - remove/replace specified html pieces during the build
+		7 - clean:tempbuild - REMOVE THE TEMP FOLDER USED DURING THE BUILD
 	*/
-	grunt.registerTask('build',['clean:build', 'stylus', 'concat', 'uglify', 'htmlrefs']);
+	grunt.registerTask('build',['clean:build', 'stylus', 'ngtemplates', 'concat', 'uglify', 'htmlrefs']);
 	grunt.registerTask('dev',['livereload-start', 'connect', 'regarde']);
 
 }
